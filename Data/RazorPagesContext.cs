@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Medicine.Data
 {
-    public class RazorPagesContext: DbContext
+    public class RazorPagesContext : DbContext
     {
+        
         public RazorPagesContext(
             DbContextOptions<RazorPagesContext> options)
             : base(options)

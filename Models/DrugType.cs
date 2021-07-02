@@ -12,9 +12,9 @@ namespace Medicines.Models
         {
             Drug,
             Ointmen,
-            solution,
-            injection,
-            other
+            Solution,
+            Injection,
+            Other
         }
         [Required]
         public int Id { get; set; }
