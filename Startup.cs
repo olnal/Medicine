@@ -1,7 +1,9 @@
 using Medicine.Data;
+using Medicines.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,7 +28,16 @@ namespace Medicine
         {
             services.AddRazorPages();
             services.AddDbContext<RazorPagesContext>(options =>
-      options.UseSqlServer(Configuration.GetConnectionString("RazorPagesContext")));
+            options.UseSqlServer(Configuration.GetConnectionString("RazorPagesContext")));
+
+            var optionsBuilder = new DbContextOptionsBuilder<RazorPagesContext>();
+            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("RazorPagesContext"));
+
+            var context = new RazorPagesContext(optionsBuilder.Options);
+            var druglist = new DrugList(context);
+            //var specieslist = new specieslist(context);
+            services.AddSingleton<DrugList>(druglist);
+            //services.addsingleton<specieslist>(specieslist);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
