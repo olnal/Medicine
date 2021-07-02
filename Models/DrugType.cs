@@ -11,7 +11,7 @@ namespace Medicines.Models
         public enum Category
         {
             Drug,
-            ointmen,
+            Ointmen,
             solution,
             injection,
             other
