@@ -25,7 +25,7 @@ namespace Medicine.Pages.Drugs
         [BindProperty]
         public DrugView DrugView { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGetAsync(int? id)
         {
             if (id == null)
             {

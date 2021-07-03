@@ -2,28 +2,28 @@
 @model Medicine.Pages.Drugs.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Довідник ліків";
 }
 
-<h1>Index</h1>
+<h1>Довідник ліків</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Додати ліки в список</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Drug[0].Name)
+                Назва
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Drug[0].Type.Type)
+                Тип 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Drug[0].Price)
+                 Ціна
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Drug[0].Count)
+                 Кількість
             </th>
             <th></th>
         </tr>
@@ -44,9 +44,8 @@
                 @Html.DisplayFor(modelItem => item.Count)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Редагувати</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Видалити</a>
             </td>
         </tr>
 }

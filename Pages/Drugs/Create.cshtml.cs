@@ -48,11 +48,12 @@ namespace Medicine.Pages.Drugs
 
                 _typelist.Add(nt);
             }
+            
             var addDrug=new Drug
             {
                 Id = DrugView.Id,
                 Name = DrugView.Name,
-                Type = DBType,
+                Type = _typelist.Get(DrugView.Type),
                 Price = DrugView.Price,
                 Count = DrugView.Count
             };

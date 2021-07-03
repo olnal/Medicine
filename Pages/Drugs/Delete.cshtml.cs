@@ -12,47 +12,53 @@ namespace Medicine.Pages.Drugs
 {
     public class DeleteModel : PageModel
     {
-        private readonly Medicine.Data.RazorPagesContext _context;
+        private readonly DrugList _druglist;
+        private readonly TypeList _typelist;
 
-        public DeleteModel(Medicine.Data.RazorPagesContext context)
+        public DeleteModel(DrugList druglist, TypeList typelist)
         {
-            _context = context;
+            _druglist = druglist;
+            _typelist = typelist;
         }
 
         [BindProperty]
-        public Drug Drug { get; set; }
+        public DrugView DrugView { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Drug = await _context.Drugs.FirstOrDefaultAsync(m => m.Id == id);
+            var drug = _druglist.Get(id);
 
-            if (Drug == null)
+            if (drug == null)
             {
                 return NotFound();
             }
+
+            DrugView = new DrugView()
+            {
+                Id = drug.Id,
+                Name = drug.Name,
+                Type = drug.Type.Type,
+                Price = drug.Price,
+                Count = drug.Count
+            };
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public IActionResult OnPostAsync()
         {
-            if (id == null)
+            if (DrugView.Id == null)
             {
                 return NotFound();
             }
-
-            Drug = await _context.Drugs.FindAsync(id);
-
-            if (Drug != null)
-            {
-                _context.Drugs.Remove(Drug);
-                await _context.SaveChangesAsync();
-            }
-
+            
+            _druglist.Delete(DrugView.Id);
+            
             return RedirectToPage("./Index");
         }
     }
