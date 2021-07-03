@@ -1,4 +1,4 @@
-﻿using Medicines.Models;
+﻿using Medicine.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -19,11 +19,11 @@ namespace Medicine.Data
                     context.DrugTypes.AddRange(
                         new DrugType
                         {
-                            Type = DrugType.Category.Drug
+                            Type = "Drug"
                         },
                         new DrugType
                         {
-                            Type = DrugType.Category.Ointmen
+                            Type = "Ointmen"
                         }
                     );
                     context.SaveChanges();
@@ -36,7 +36,7 @@ namespace Medicine.Data
                         {
                             Id = 1,
                             Name = "Medopram",
-                            Type = context.DrugTypes.Where(t => t.Type == DrugType.Category.Drug).FirstOrDefault(),
+                            Type = context.DrugTypes.Where(t => t.Type == "Drug").FirstOrDefault(),
                             Price = 151.38,
                             Count = 20
                         },
@@ -44,7 +44,7 @@ namespace Medicine.Data
                          {
                              Id = 2,
                              Name = "Diclofenac",
-                             Type = context.DrugTypes.Where(t => t.Type == DrugType.Category.Ointmen).FirstOrDefault(),
+                             Type = context.DrugTypes.Where(t => t.Type == "Ointmen").FirstOrDefault(),
                              Price = 99.34,
                              Count = 5
                          }

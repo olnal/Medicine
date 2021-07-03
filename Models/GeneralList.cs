@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Medicines.Models
+namespace Medicine.Models
 {
     public abstract class GeneralList<T>
     {

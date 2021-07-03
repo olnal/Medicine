@@ -7,21 +7,23 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Medicine.Data;
-using Medicines.Models;
+using Medicine.Models;
 
 namespace Medicine.Pages.Drugs
 {
     public class EditModel : PageModel
     {
-        private readonly Medicine.Data.RazorPagesContext _context;
+        private readonly DrugList _druglist;
+        private readonly TypeList _typelist;
 
-        public EditModel(Medicine.Data.RazorPagesContext context)
+        public EditModel(DrugList druglist, TypeList typelist)
         {
-            _context = context;
+            _druglist = druglist;
+            _typelist = typelist;
         }
 
         [BindProperty]
-        public Drug Drug { get; set; }
+        public DrugView DrugView { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,33 +32,60 @@ namespace Medicine.Pages.Drugs
                 return NotFound();
             }
 
-            Drug = await _context.Drugs.FirstOrDefaultAsync(m => m.Id == id);
+            var drug = _druglist.Get(id);
 
-            if (Drug == null)
+            if (drug == null)
             {
                 return NotFound();
             }
+
+            DrugView = new DrugView()
+            {
+                Id = drug.Id,
+                Name = drug.Name,
+                Type = drug.Type.Type,
+                Price = drug.Price,
+                Count = drug.Count
+            };
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Drug).State = EntityState.Modified;
+            var DBType = _typelist.Get(DrugView.Type);
+
+            if (DBType == null)
+            {
+                var nt = new DrugType
+                {
+                    Type = DrugView.Type
+                };
+
+                _typelist.Add(nt);
+
+            }
+            var editedDrug = new Drug
+            {
+                Id = DrugView.Id,
+                Name = DrugView.Name,
+                Type = DBType,
+                Price = DrugView.Price,
+                Count = DrugView.Count
+            };
 
             try
             {
-                await _context.SaveChangesAsync();
+                _druglist.Edit(editedDrug);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DrugExists(Drug.Id))
+                if (!DrugExists(editedDrug.Id))
                 {
                     return NotFound();
                 }
@@ -65,13 +94,14 @@ namespace Medicine.Pages.Drugs
                     throw;
                 }
             }
+             return RedirectToPage("./Index");
+         }
 
-            return RedirectToPage("./Index");
-        }
-
-        private bool DrugExists(int id)
-        {
-            return _context.Drugs.Any(e => e.Id == id);
-        }
+         private bool DrugExists(int id)
+         {
+             return _druglist.Get(id) != null;
+         }
     }
 }
+
+

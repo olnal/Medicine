@@ -46,6 +46,11 @@ namespace Medicine.Models
             return _context.DrugTypes.Where(t => t.Id == id).FirstOrDefault();
         }
 
+        public DrugType Get(string name)
+        {
+            return _context.DrugTypes.Where(t => t.Type == name).FirstOrDefault();
+        }
+
         public override List<DrugType> GetAll()
         {
             return _context.DrugTypes.ToList();

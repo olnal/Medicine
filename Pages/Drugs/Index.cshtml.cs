@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Medicine.Data;
-using Medicines.Models;
+using Medicine.Models;
 
 namespace Medicine.Pages.Drugs
 {

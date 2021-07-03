@@ -6,17 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Medicine.Data;
-using Medicines.Models;
+using Medicine.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Medicine.Pages.Drugs
 {
     public class CreateModel : PageModel
     {
-        private readonly Medicine.Data.RazorPagesContext _context;
-
-        public CreateModel(Medicine.Data.RazorPagesContext context)
+        private readonly DrugList _druglist;
+        private readonly TypeList _typelist;
+        public CreateModel(DrugList druglist, TypeList typelist)
         {
-            _context = context;
+            _druglist = druglist;
+            _typelist = typelist;
         }
 
         public IActionResult OnGet()
@@ -25,20 +27,56 @@ namespace Medicine.Pages.Drugs
         }
 
         [BindProperty]
-        public Drug Drug { get; set; }
+        public DrugView DrugView { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Drugs.Add(Drug);
-            await _context.SaveChangesAsync();
+            var DBType = _typelist.Get(DrugView.Type);
 
+            if (DBType == null)
+            {
+                var nt = new DrugType
+                {
+                    Type = DrugView.Type
+                };
+
+                _typelist.Add(nt);
+            }
+            var addDrug=new Drug
+            {
+                Id = DrugView.Id,
+                Name = DrugView.Name,
+                Type = DBType,
+                Price = DrugView.Price,
+                Count = DrugView.Count
+            };
+            try
+            {
+                _druglist.Add(addDrug);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!DrugExists(addDrug.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            
             return RedirectToPage("./Index");
+        }
+        private bool DrugExists(int id)
+        {
+            return _druglist.Get(id) != null;
         }
     }
 }

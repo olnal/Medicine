@@ -4,8 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-
-namespace Medicines.Models
+namespace Medicine.Models
 {
     public class Drug
     {       

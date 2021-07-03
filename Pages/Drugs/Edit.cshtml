@@ -13,21 +13,26 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Drug.Id" />
+            <input type="hidden" asp-for="DrugView.Id" />
             <div class="form-group">
-                <label asp-for="Drug.Name" class="control-label"></label>
-                <input asp-for="Drug.Name" class="form-control" />
-                <span asp-validation-for="Drug.Name" class="text-danger"></span>
+                <label asp-for="DrugView.Name" class="control-label"></label>
+                <input asp-for="DrugView.Name" class="form-control" />
+                <span asp-validation-for="DrugView.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Drug.Price" class="control-label"></label>
-                <input asp-for="Drug.Price" class="form-control" />
-                <span asp-validation-for="Drug.Price" class="text-danger"></span>
+                <label asp-for="DrugView.Type" class="control-label"></label>
+                <input asp-for="DrugView.Type" class="form-control" />
+                <span asp-validation-for="DrugView.Type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Drug.Count" class="control-label"></label>
-                <input asp-for="Drug.Count" class="form-control" />
-                <span asp-validation-for="Drug.Count" class="text-danger"></span>
+                <label asp-for="DrugView.Price" class="control-label"></label>
+                <input asp-for="DrugView.Price" class="form-control" />
+                <span asp-validation-for="DrugView.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DrugView.Count" class="control-label"></label>
+                <input asp-for="DrugView.Count" class="form-control" />
+                <span asp-validation-for="DrugView.Count" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

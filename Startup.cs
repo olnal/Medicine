@@ -1,4 +1,5 @@
 using Medicine.Data;
+using Medicine.Models;
 using Medicines.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,9 +36,9 @@ namespace Medicine
 
             var context = new RazorPagesContext(optionsBuilder.Options);
             var druglist = new DrugList(context);
-            //var specieslist = new specieslist(context);
+            var typelist = new TypeList(context);
             services.AddSingleton<DrugList>(druglist);
-            //services.addsingleton<specieslist>(specieslist);
+            services.AddSingleton<TypeList>(typelist);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

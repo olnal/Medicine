@@ -10,18 +10,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Medicine.Migrations
 {
     [DbContext(typeof(RazorPagesContext))]
-    [Migration("20210702131903_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210702175721_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Medicines.Models.Drug", b =>
+            modelBuilder.Entity("Medicine.Models.Drug", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -46,22 +46,23 @@ namespace Medicine.Migrations
                     b.ToTable("Drugs");
                 });
 
-            modelBuilder.Entity("Medicines.Models.DrugType", b =>
+            modelBuilder.Entity("Medicine.Models.DrugType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("DrugTypes");
                 });
 
-            modelBuilder.Entity("Medicines.Models.Order", b =>
+            modelBuilder.Entity("Medicine.Models.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,18 +85,18 @@ namespace Medicine.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Medicines.Models.Drug", b =>
+            modelBuilder.Entity("Medicine.Models.Drug", b =>
                 {
-                    b.HasOne("Medicines.Models.DrugType", "Type")
+                    b.HasOne("Medicine.Models.DrugType", "Type")
                         .WithMany()
                         .HasForeignKey("TypeId");
 
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("Medicines.Models.Order", b =>
+            modelBuilder.Entity("Medicine.Models.Order", b =>
                 {
-                    b.HasOne("Medicines.Models.Drug", "Drug")
+                    b.HasOne("Medicine.Models.Drug", "Drug")
                         .WithMany()
                         .HasForeignKey("DrugId");
 

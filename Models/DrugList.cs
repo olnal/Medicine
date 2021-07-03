@@ -4,8 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-namespace Medicines.Models
+namespace Medicine.Models
 {
     public class DrugList : GeneralList<Drug>
     {
@@ -32,13 +31,22 @@ namespace Medicines.Models
         public override void Edit(Drug item)
         {
             var existing = _context.Drugs.Where(t => t.Id == item.Id).FirstOrDefault();
+            
             if (existing != null)
             {
-                existing.Name = item.Name;
+                existing.Name = item.Name ?? existing.Name;
                 existing.Type = item.Type;
-                existing.Price = item.Price;
-                existing.Count = item.Count;
 
+                if (item.Price != 0)
+                {
+                    existing.Price = item.Price;
+                }
+
+                if (item.Count != 0)
+                {
+                    existing.Count = item.Count;
+                }
+                
                 _context.SaveChanges();
             }
         }
