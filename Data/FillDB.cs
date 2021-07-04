@@ -19,11 +19,11 @@ namespace Medicine.Data
                     context.DrugTypes.AddRange(
                         new DrugType
                         {
-                            Type = "Drug"
+                            Type = "Пігулки"
                         },
                         new DrugType
                         {
-                            Type = "Ointmen"
+                            Type = "Мазь"
                         }
                     );
                     context.SaveChanges();
@@ -35,16 +35,16 @@ namespace Medicine.Data
                         new Drug
                         {
                             Id = 1,
-                            Name = "Medopram",
-                            Type = context.DrugTypes.Where(t => t.Type == "Drug").FirstOrDefault(),
+                            Name = "Медопрам",
+                            Type = context.DrugTypes.Where(t => t.Type == "Пігулки").FirstOrDefault(),
                             Price = 151.38,
                             Count = 20
                         },
                          new Drug
                          {
                              Id = 2,
-                             Name = "Diclofenac",
-                             Type = context.DrugTypes.Where(t => t.Type == "Ointmen").FirstOrDefault(),
+                             Name = "Діклофенак",
+                             Type = context.DrugTypes.Where(t => t.Type == "Мазь").FirstOrDefault(),
                              Price = 99.34,
                              Count = 5
                          }

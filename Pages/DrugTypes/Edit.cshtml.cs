@@ -13,50 +13,65 @@ namespace Medicine.Pages.DrugTypes
 {
     public class EditModel : PageModel
     {
-        private readonly Medicine.Data.RazorPagesContext _context;
+       private readonly DrugList _druglist;
+        private readonly TypeList _typelist;
 
-        public EditModel(Medicine.Data.RazorPagesContext context)
+        public EditModel(DrugList druglist, TypeList typelist)
         {
-            _context = context;
+            _druglist = druglist;
+            _typelist = typelist;
         }
 
         [BindProperty]
         public DrugType DrugType { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            DrugType = await _context.DrugTypes.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (DrugType == null)
+            var editedType = _typelist.Get(id);
+            if (editedType == null)
             {
                 return NotFound();
             }
+            DrugType = new DrugType()
+            {
+                Id = editedType.Id,
+                Type = editedType.Type
+            };
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+            var tempDrug = _druglist.Get(DrugType);
+            var editedDrug = new Drug
+            {
+                Id = tempDrug.Id,
+                Name = tempDrug.Name,
+                Type = DrugType,
+                Price = tempDrug.Price,
+                Count = tempDrug.Count
+            };
 
-            _context.Attach(DrugType).State = EntityState.Modified;
+            //editedDrug.Type.Type = "Sho popalo";
 
             try
             {
-                await _context.SaveChangesAsync();
+                _typelist.Edit(DrugType);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DrugTypeExists(DrugType.Id))
+                if (!TypeExists(DrugType.Id))
                 {
                     return NotFound();
                 }
@@ -65,13 +80,38 @@ namespace Medicine.Pages.DrugTypes
                     throw;
                 }
             }
+            try
+            {
+                _druglist.Edit(editedDrug);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!DrugExists(editedDrug.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            
+            catch (InvalidOperationException)
+            {
 
+            }
             return RedirectToPage("./Index");
         }
 
-        private bool DrugTypeExists(int id)
+        private bool DrugExists(int id)
         {
-            return _context.DrugTypes.Any(e => e.Id == id);
+            return _druglist.Get(id) != null;
         }
+        private bool TypeExists(int id)
+        {
+            return _typelist.Get(id) != null;
+        }
+
+
     }
 }

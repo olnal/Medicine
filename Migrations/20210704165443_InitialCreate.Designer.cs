@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Medicine.Migrations
 {
     [DbContext(typeof(RazorPagesContext))]
-    [Migration("20210704122011_InitialCreate")]
+    [Migration("20210704165443_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -13,12 +13,11 @@ namespace Medicine.Pages.Drugs
     public class DeleteModel : PageModel
     {
         private readonly DrugList _druglist;
-        private readonly TypeList _typelist;
+         
 
-        public DeleteModel(DrugList druglist, TypeList typelist)
+        public DeleteModel(DrugList druglist)
         {
-            _druglist = druglist;
-            _typelist = typelist;
+            _druglist = druglist;            
         }
 
         [BindProperty]
