@@ -1,0 +1,35 @@
+﻿@page
+@model Medicine.Pages.DrugTypes.IndexModel
+
+@{
+    ViewData["Title"] = "Типи ліків";
+}
+
+<h1>Типи ліків</h1>
+
+<p>
+    <a asp-page="Create">Додати новий тип</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Назва
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.DrugType) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Редагувати</a> |                
+                <a asp-page="./Delete" asp-route-id="@item.Id">Видалити</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

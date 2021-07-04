@@ -56,6 +56,11 @@ namespace Medicine.Models
             return _context.Drugs.Where(t => t.Id == id).Include(t => t.Type).FirstOrDefault();
         }
 
+        public  Drug Get(DrugType drugtype)
+        {
+            return _context.Drugs.Where(t => t.Type == drugtype).Include(t => t.Type).FirstOrDefault();
+        }
+
         public override List<Drug> GetAll()
         {
             return _context.Drugs.Include(t => t.Type).ToList();
