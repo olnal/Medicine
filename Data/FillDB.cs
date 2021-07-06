@@ -107,19 +107,19 @@ namespace Medicine.Data
                         new Order
                         {
                             Drug = context.Drugs.Where(t => t.Id == 1).FirstOrDefault(),
-                            Amount = 1,
+                            Amount = 15,
                             Date = new DateTime(2021, 03, 05)
                         },
                          new Order
                          {
                              Drug = context.Drugs.Where(t => t.Id == 2).FirstOrDefault(),
-                             Amount = 1,
+                             Amount = 100,
                              Date = new DateTime(2021, 03, 07)
                          },
                          new Order
                          {
                              Drug = context.Drugs.Where(t => t.Id == 1).FirstOrDefault(),
-                             Amount = 2,
+                             Amount = 20,
                              Date = new DateTime(2021, 03, 07)
                          }
                     );
