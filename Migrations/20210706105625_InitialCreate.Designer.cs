@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Medicine.Migrations
 {
     [DbContext(typeof(RazorPagesContext))]
-    [Migration("20210704165443_InitialCreate")]
+    [Migration("20210706105625_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,29 @@ namespace Medicine.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Medicine.Models.Buy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DrugId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DrugId");
+
+                    b.ToTable("Buys");
+                });
 
             modelBuilder.Entity("Medicine.Models.Drug", b =>
                 {
@@ -83,6 +106,15 @@ namespace Medicine.Migrations
                     b.HasIndex("DrugId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Medicine.Models.Buy", b =>
+                {
+                    b.HasOne("Medicine.Models.Drug", "Drug")
+                        .WithMany()
+                        .HasForeignKey("DrugId");
+
+                    b.Navigation("Drug");
                 });
 
             modelBuilder.Entity("Medicine.Models.Drug", b =>

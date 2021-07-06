@@ -19,7 +19,23 @@ namespace Medicine.Data
                     context.DrugTypes.AddRange(
                         new DrugType
                         {
-                            Type = "Пігулки"
+                            Type = "Пігулка"
+                        },
+                        new DrugType
+                        {
+                            Type = "Розчин"
+                        },
+                        new DrugType
+                        {
+                            Type = "Ін'єкція"
+                        },
+                        new DrugType
+                        {
+                            Type = "Засоби гігієни"
+                        },
+                        new DrugType
+                        {
+                            Type = "Інше"
                         },
                         new DrugType
                         {
@@ -36,7 +52,7 @@ namespace Medicine.Data
                         {
                             Id = 1,
                             Name = "Медопрам",
-                            Type = context.DrugTypes.Where(t => t.Type == "Пігулки").FirstOrDefault(),
+                            Type = context.DrugTypes.Where(t => t.Type == "Пігулка").FirstOrDefault(),
                             Price = 151.38,
                             Count = 20
                         },
@@ -44,6 +60,39 @@ namespace Medicine.Data
                          {
                              Id = 2,
                              Name = "Діклофенак",
+                             Type = context.DrugTypes.Where(t => t.Type == "Мазь").FirstOrDefault(),
+                             Price = 99.34,
+                             Count = 5
+                         }
+                         ,
+                         new Drug
+                         {
+                             Id = 3,
+                             Name = "Підгузники",
+                             Type = context.DrugTypes.Where(t => t.Type == "Засоби гігієни").FirstOrDefault(),
+                             Price = 99.34,
+                             Count = 5
+                         },
+                         new Drug
+                         {
+                             Id = 4,
+                             Name = "Вода мінеральна",
+                             Type = context.DrugTypes.Where(t => t.Type == "Інше").FirstOrDefault(),
+                             Price = 99.34,
+                             Count = 5
+                         },
+                         new Drug
+                         {
+                             Id = 5,
+                             Name = "Флюколд",
+                             Type = context.DrugTypes.Where(t => t.Type == "Пігулка").FirstOrDefault(),
+                             Price = 99.34,
+                             Count = 5
+                         },
+                         new Drug
+                         {
+                             Id = 6,
+                             Name = "Триакутан",
                              Type = context.DrugTypes.Where(t => t.Type == "Мазь").FirstOrDefault(),
                              Price = 99.34,
                              Count = 5
@@ -76,10 +125,33 @@ namespace Medicine.Data
                     );
                     context.SaveChanges();
                 }
+                if (!context.Buys.Any())
+                {
+                    context.Buys.AddRange(
+                        new Buy
+                        {
+                            Drug = context.Drugs.Where(t => t.Id == 4).FirstOrDefault(),
+                            Amount = 1,
+                            Date = new DateTime(2020, 03, 05)
+                        },
+                         new Buy
+                         {
+                             Drug = context.Drugs.Where(t => t.Id == 2).FirstOrDefault(),
+                             Amount = 1,
+                             Date = new DateTime(2020, 03, 07)
+                         },
+                         new Buy
+                         {
+                             Drug = context.Drugs.Where(t => t.Id == 1).FirstOrDefault(),
+                             Amount = 2,
+                             Date = new DateTime(2020, 03, 07)
+                         }
+                    );
+                    context.SaveChanges();
+                }
 
             }
 
         }
     }
 }
-

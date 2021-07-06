@@ -42,6 +42,27 @@ namespace Medicine.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Buys",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DrugId = table.Column<int>(type: "int", nullable: true),
+                    Amount = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Buys", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Buys_Drugs_DrugId",
+                        column: x => x.DrugId,
+                        principalTable: "Drugs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -63,6 +84,11 @@ namespace Medicine.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Buys_DrugId",
+                table: "Buys",
+                column: "DrugId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Drugs_TypeId",
                 table: "Drugs",
                 column: "TypeId");
@@ -75,6 +101,9 @@ namespace Medicine.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Buys");
+
             migrationBuilder.DropTable(
                 name: "Orders");
 

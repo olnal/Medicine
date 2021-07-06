@@ -19,5 +19,6 @@ namespace Medicine.Data
         public DbSet<Drug> Drugs { get; set; }
         public DbSet<DrugType> DrugTypes { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Buy> Buys { get; set; }
     }
 }

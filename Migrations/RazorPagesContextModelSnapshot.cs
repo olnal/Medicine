@@ -19,6 +19,29 @@ namespace Medicine.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Medicine.Models.Buy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DrugId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DrugId");
+
+                    b.ToTable("Buys");
+                });
+
             modelBuilder.Entity("Medicine.Models.Drug", b =>
                 {
                     b.Property<int>("Id")
@@ -81,6 +104,15 @@ namespace Medicine.Migrations
                     b.HasIndex("DrugId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Medicine.Models.Buy", b =>
+                {
+                    b.HasOne("Medicine.Models.Drug", "Drug")
+                        .WithMany()
+                        .HasForeignKey("DrugId");
+
+                    b.Navigation("Drug");
                 });
 
             modelBuilder.Entity("Medicine.Models.Drug", b =>
