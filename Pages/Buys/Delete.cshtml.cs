@@ -12,25 +12,24 @@ namespace Medicine.Pages.Buys
 {
     public class DeleteModel : PageModel
     {
-        private readonly Medicine.Data.RazorPagesContext _context;
+        private readonly BuyList _buylist;
 
-        public DeleteModel(Medicine.Data.RazorPagesContext context)
+        public DeleteModel(BuyList buylist)
         {
-            _context = context;
+            _buylist = buylist;           
         }
+    
 
         [BindProperty]
         public Buy Buy { get; set; }
-
-        public async Task<IActionResult> OnGetAsync(int? id)
+    public IActionResult OnGetAsync()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            /* if (id == null)
+             {
+                 return NotFound();
+             }*/
 
-            Buy = await _context.Buys.FirstOrDefaultAsync(m => m.Id == id);
-
+            Buy = _buylist.Get();// треба всі айді щоб 
             if (Buy == null)
             {
                 return NotFound();
@@ -38,22 +37,24 @@ namespace Medicine.Pages.Buys
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public IActionResult OnPostAsync()
         {
-            if (id == null)
+            /* if (id == null)
+             {
+                 return NotFound();
+             }*/
+
+            Buy = _buylist.Get();
+            while (Buy != null)
             {
-                return NotFound();
+                if (Buy != null)
+                {
+                    _buylist.Delete(Buy.Id);
+                }
+                Buy = _buylist.Get();
             }
 
-            Buy = await _context.Buys.FindAsync(id);
-
-            if (Buy != null)
-            {
-                _context.Buys.Remove(Buy);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
+                return RedirectToPage("./Index");
         }
     }
 }

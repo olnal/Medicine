@@ -19,5 +19,7 @@ namespace Medicine.Models
 
         [Required]
         public DateTime Date { get; set; }
+        
+        
     }
 }

@@ -20,14 +20,14 @@ namespace Medicine.Pages.Buys
             _buylist = buylist;
             _druglist = druglist;
         }
+        [BindProperty]
+        public BuyView BuyView { get; set; }
 
         public IActionResult OnGet()
         {
+            
             return Page();
-        }
-
-        [BindProperty]
-        public BuyView BuyView { get; set; }
+        }        
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public IActionResult OnPostAsync()
@@ -43,8 +43,19 @@ namespace Medicine.Pages.Buys
                 Amount=BuyView.Amount,
                 Date=BuyView.Date
             };
-
-            _buylist.Add(addBuy);
+            var x = _druglist.Get(BuyView.Drug);
+            
+             if (x.Count>=addBuy.Amount)
+            {
+                x.Count = x.Count - addBuy.Amount;
+                _druglist.Edit(x);
+                _buylist.Add(addBuy);
+            }
+             else
+            {
+                ViewData["Message"] = "Ці ліки наявні в кількості "+x.Count;
+                return Page();
+            }
             /*try
             {
                 _buylist.Add(addBuy);
@@ -59,8 +70,8 @@ namespace Medicine.Pages.Buys
                 {
                     throw;
                 }
-            }
-            */
+            }*/
+            
             return RedirectToPage("./Index");
         }
         private bool DrugExists(int id)

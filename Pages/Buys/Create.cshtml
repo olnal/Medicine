@@ -7,24 +7,24 @@
 
 <h1>Додавання товару</h1>
 
-<h4></h4>
+<h4><p>@ViewData["Message"]</p></h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="BuyView.Drug" class="control-label"></label>
+                <label asp-for="BuyView.Drug" class="control-label">Ліки</label>
                 <input asp-for="BuyView.Drug" class="form-control" />
                 <span asp-validation-for="BuyView.Drug" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BuyView.Amount" class="control-label"></label>
+                <label asp-for="BuyView.Amount" class="control-label">Кількість</label>
                 <input asp-for="BuyView.Amount" class="form-control" />
                 <span asp-validation-for="BuyView.Amount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BuyView.Date" class="control-label"></label>
+                <label asp-for="BuyView.Date" class="control-label">Дата</label>
                 <input asp-for="BuyView.Date" class="form-control" />
                 <span asp-validation-for="BuyView.Date" class="text-danger"></span>
             </div>

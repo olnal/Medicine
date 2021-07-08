@@ -15,15 +15,15 @@ namespace Medicine.Models
         {
             _context = context;
         }
-
+        
         public override void Add(Buy item)
         {
             var existing = _context.Drugs.Where(t => t.Name == item.Drug.Name).FirstOrDefault();
             
-            if (existing != null)
+            /*if (existing != null)
             {
                 existing.Count = existing.Count-item.Amount;
-            }
+            }*/
             _context.Buys.Add(item);
             _context.SaveChanges();
         }
@@ -37,6 +37,7 @@ namespace Medicine.Models
                 _context.SaveChanges();
             }
         }
+
 
         public override void Edit(Buy item)
         {
@@ -53,6 +54,11 @@ namespace Medicine.Models
         public override Buy Get(int? id)
         {
             return _context.Buys.Where(t => t.Id == id).FirstOrDefault();
+        }
+
+        public Buy Get()
+        {
+            return _context.Buys.FirstOrDefault();
         }
 
         public override List<Buy> GetAll()

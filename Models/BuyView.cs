@@ -8,5 +8,9 @@ namespace Medicine.Models
     public class BuyView : Buy
     {
         public new string Drug { get; set; }
+        BuyView()
+        {
+            Date=DateTime.Now;
+        }
     }
 }
