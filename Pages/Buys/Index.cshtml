@@ -2,29 +2,28 @@
 @model Medicine.Pages.Buys.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Покупки";
 }
 
-<h1>Index</h1>
+<h1>Покупки</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Додати товар</a>  |  <a asp-page="Delete">Видалити товар</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Buy[0].Drug.Name)
+                назва
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Buy[0].Drug.Price)
+                Ціна
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Buy[0].Amount)
+                Кількість
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Buy[0].Date)
-            </th>
+                Дата
             <th></th>
         </tr>
     </thead>
@@ -42,11 +41,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

@@ -1,5 +1,6 @@
 ﻿using Medicine.Data;
 using Medicines.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,12 @@ namespace Medicine.Models
 
         public override void Add(Buy item)
         {
+            var existing = _context.Drugs.Where(t => t.Name == item.Drug.Name).FirstOrDefault();
+            
+            if (existing != null)
+            {
+                existing.Count = existing.Count-item.Amount;
+            }
             _context.Buys.Add(item);
             _context.SaveChanges();
         }
@@ -50,7 +57,7 @@ namespace Medicine.Models
 
         public override List<Buy> GetAll()
         {
-            return _context.Buys.ToList();
+            return _context.Buys.Include(t=>t.Drug).ToList();
         }
     }
 }

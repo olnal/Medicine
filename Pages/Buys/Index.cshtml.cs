@@ -12,18 +12,18 @@ namespace Medicine.Pages.Buys
 {
     public class IndexModel : PageModel
     {
-        private readonly Medicine.Data.RazorPagesContext _context;
+        private readonly BuyList _buylist;
 
-        public IndexModel(Medicine.Data.RazorPagesContext context)
+        public IndexModel(BuyList buyList)
         {
-            _context = context;
+            _buylist = buyList;
         }
 
         public IList<Buy> Buy { get;set; }
 
         public async Task OnGetAsync()
         {
-            Buy = await _context.Buys.ToListAsync();
+            Buy =  _buylist.GetAll();
         }
     }
 }

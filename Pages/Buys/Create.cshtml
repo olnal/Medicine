@@ -2,36 +2,41 @@
 @model Medicine.Pages.Buys.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Додавання товару";
 }
 
-<h1>Create</h1>
+<h1>Додавання товару</h1>
 
-<h4>Buy</h4>
+<h4></h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Buy.Amount" class="control-label"></label>
-                <input asp-for="Buy.Amount" class="form-control" />
-                <span asp-validation-for="Buy.Amount" class="text-danger"></span>
+                <label asp-for="BuyView.Drug" class="control-label"></label>
+                <input asp-for="BuyView.Drug" class="form-control" />
+                <span asp-validation-for="BuyView.Drug" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Buy.Date" class="control-label"></label>
-                <input asp-for="Buy.Date" class="form-control" />
-                <span asp-validation-for="Buy.Date" class="text-danger"></span>
+                <label asp-for="BuyView.Amount" class="control-label"></label>
+                <input asp-for="BuyView.Amount" class="form-control" />
+                <span asp-validation-for="BuyView.Amount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="BuyView.Date" class="control-label"></label>
+                <input asp-for="BuyView.Date" class="form-control" />
+                <span asp-validation-for="BuyView.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Додати" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">Назад</a>
 </div>
 
 @section Scripts {
