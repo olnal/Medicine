@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace Medicine.Models
 {
-    public class BuyView : Buy
+    public class OrderView : Order
     {
-        public new string Drug { get; set; }
-        
+        public string Drug { get; set; }
     }
 }

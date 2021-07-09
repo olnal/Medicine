@@ -131,14 +131,12 @@ namespace Medicine.Data
                         new Buy
                         {
                             Drug = context.Drugs.Where(t => t.Id == 4).FirstOrDefault(),
-                            Amount = 1,
-                            Date = new DateTime(2020, 03, 05)
+                            Amount = 1
                         },
                          new Buy
                          {
                              Drug = context.Drugs.Where(t => t.Id == 2).FirstOrDefault(),
-                             Amount = 1,
-                             Date = new DateTime(2020, 03, 07)
+                             Amount = 1
                          },
                          new Buy
                          {

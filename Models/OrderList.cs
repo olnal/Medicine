@@ -1,5 +1,6 @@
 ﻿using Medicine.Data;
 using Medicines.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,10 +48,14 @@ namespace Medicine.Models
         {
             return _context.Orders.Where(t => t.Id == id).FirstOrDefault();
         }
+        public  Order Get(Drug drug)
+        {
+            return _context.Orders.Where(t => t.Drug == drug).FirstOrDefault();
+        }
 
         public override List<Order> GetAll()
         {
-            return _context.Orders.ToList();
+            return _context.Orders.Include(t => t.Drug).ToList();
         }
     }
 }

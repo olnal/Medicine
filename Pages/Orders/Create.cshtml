@@ -1,0 +1,39 @@
+﻿@page
+@model Medicine.Pages.Orders.CreateModel
+
+@{
+    ViewData["Title"] = "Створення замовлення";
+}
+
+<h1>Створення замовлення</h1>
+
+<h4></h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Order.Drug.Name" class="control-label"></label>
+                <input asp-for="Order.Drug.Name" class="form-control" />
+                <span asp-validation-for="Order.Drug.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.Amount" class="control-label"></label>
+                <input asp-for="Order.Amount" class="form-control" />
+                <span asp-validation-for="Order.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Створити" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Назад</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

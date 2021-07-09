@@ -38,9 +38,12 @@ namespace Medicine
             var druglist = new DrugList(context);
             var typelist = new TypeList(context);
             var buylist = new BuyList(context);
+            var orderlist = new OrderList(context);
             services.AddSingleton<DrugList>(druglist);
             services.AddSingleton<TypeList>(typelist);
             services.AddSingleton<BuyList>(buylist);
+            services.AddSingleton<OrderList>(orderlist);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

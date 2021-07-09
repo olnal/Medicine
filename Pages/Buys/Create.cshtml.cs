@@ -15,19 +15,23 @@ namespace Medicine.Pages.Buys
     {
         private readonly DrugList _druglist;
         private readonly BuyList _buylist;
-        public CreateModel(BuyList buylist, DrugList druglist)
+        private readonly OrderList _orderlist;
+        public CreateModel(BuyList buylist, DrugList druglist, OrderList orderlist)
         {
             _buylist = buylist;
             _druglist = druglist;
+            _orderlist = orderlist;
         }
-        [BindProperty]
-        public BuyView BuyView { get; set; }
+        
 
         public IActionResult OnGet()
         {
             
             return Page();
-        }        
+        }
+
+        [BindProperty]
+        public BuyView BuyView { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public IActionResult OnPostAsync()
@@ -43,34 +47,36 @@ namespace Medicine.Pages.Buys
                 Amount=BuyView.Amount,
                 Date=BuyView.Date
             };
-            var x = _druglist.Get(BuyView.Drug);
-            
-             if (x.Count>=addBuy.Amount)
+            var add = _druglist.Get(BuyView.Drug);            
+
+
+             if (add.Count>=addBuy.Amount)
             {
-                x.Count = x.Count - addBuy.Amount;
-                _druglist.Edit(x);
+                add.Count = add.Count - addBuy.Amount;
+                _druglist.Edit(add);
                 _buylist.Add(addBuy);
-            }
-             else
-            {
-                ViewData["Message"] = "Ці ліки наявні в кількості "+x.Count;
-                return Page();
-            }
-            /*try
-            {
-                _buylist.Add(addBuy);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DrugExists(addBuy.Id))
+                var addOrder = new Order
                 {
-                    return NotFound();
+                    Drug = _druglist.Get(BuyView.Drug),
+                    Id = _orderlist.Get(_druglist.Get(BuyView.Drug)).Id,
+                    Amount = BuyView.Amount
+                };
+                if (_orderlist.Get(addOrder.Drug)==null)
+                {
+                    _orderlist.Add(addOrder);
                 }
                 else
                 {
-                    throw;
+                    addOrder.Amount = addOrder.Amount + _orderlist.Get(_druglist.Get(BuyView.Drug)).Amount;
+                    _orderlist.Edit(addOrder);
                 }
-            }*/
+                
+            }
+             else
+            {
+                ViewData["Message"] = "Ці ліки наявні в кількості "+add.Count;
+                return Page();
+            }
             
             return RedirectToPage("./Index");
         }
