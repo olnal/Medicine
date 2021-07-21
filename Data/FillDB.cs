@@ -107,20 +107,17 @@ namespace Medicine.Data
                         new Order
                         {
                             Drug = context.Drugs.Where(t => t.Id == 1).FirstOrDefault(),
-                            Amount = 15,
-                            Date = new DateTime(2021, 03, 05)
+                            Amount = 15
                         },
                          new Order
                          {
                              Drug = context.Drugs.Where(t => t.Id == 2).FirstOrDefault(),
-                             Amount = 100,
-                             Date = new DateTime(2021, 03, 07)
+                             Amount = 100
                          },
                          new Order
                          {
                              Drug = context.Drugs.Where(t => t.Id == 1).FirstOrDefault(),
-                             Amount = 20,
-                             Date = new DateTime(2021, 03, 07)
+                             Amount = 20
                          }
                     );
                     context.SaveChanges();
@@ -141,8 +138,7 @@ namespace Medicine.Data
                          new Buy
                          {
                              Drug = context.Drugs.Where(t => t.Id == 1).FirstOrDefault(),
-                             Amount = 2,
-                             Date = new DateTime(2020, 03, 07)
+                             Amount = 2
                          }
                     );
                     context.SaveChanges();

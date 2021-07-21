@@ -16,7 +16,6 @@ namespace Medicine.Models
         [Required]
         public int Amount { get; set; }
 
-        [Required] 
-        public DateTime Date { get; set; }
+        
     }
 }

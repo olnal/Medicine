@@ -22,25 +22,33 @@ namespace Medicine.Pages.Orders
             _orderlist = orderlist;
         }
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
-
         [BindProperty]
         public Order Order { get; set; }
+        public IActionResult OnGetAsync()
+        {
+            Order = _orderlist.Get();
+            if (Order == null)
+            {
+                return NotFound();
+            }
+            return Page();
+        }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public IActionResult OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            Order = _orderlist.Get();
+            while (Order!=null)
             {
-                return Page();
-            }
-
-            _orderlist.Add(Order);
-            
-
+                if (Order!=null)
+                {
+                    var drug = _druglist.Get(Order.Drug.Name);
+                    drug.Count = drug.Count + Order.Amount;
+                    _druglist.Edit(drug);
+                    _orderlist.Delete(Order.Id);
+                }
+                Order = _orderlist.Get();
+            } 
             return RedirectToPage("./Index");
         }
     }

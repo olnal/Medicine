@@ -46,7 +46,6 @@ namespace Medicine.Models
             {
                 existing.Drug = item.Drug;
                 existing.Amount = item.Amount;
-                existing.Date = item.Date;
                 _context.SaveChanges();
             }
         }

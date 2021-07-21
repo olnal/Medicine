@@ -44,8 +44,7 @@ namespace Medicine.Pages.Buys
             {
                 Id = BuyView.Id,
                 Drug = _druglist.Get(BuyView.Drug),
-                Amount=BuyView.Amount,
-                Date=BuyView.Date
+                Amount=BuyView.Amount
             };
             var add = _druglist.Get(BuyView.Drug);            
 

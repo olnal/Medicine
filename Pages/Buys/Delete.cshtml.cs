@@ -24,12 +24,7 @@ namespace Medicine.Pages.Buys
         public Buy Buy { get; set; }
     public IActionResult OnGetAsync()
         {
-            /* if (id == null)
-             {
-                 return NotFound();
-             }*/
-
-            Buy = _buylist.Get();// треба всі айді щоб 
+            Buy = _buylist.Get();
             if (Buy == null)
             {
                 return NotFound();
@@ -39,11 +34,6 @@ namespace Medicine.Pages.Buys
 
         public IActionResult OnPostAsync()
         {
-            /* if (id == null)
-             {
-                 return NotFound();
-             }*/
-
             Buy = _buylist.Get();
             while (Buy != null)
             {

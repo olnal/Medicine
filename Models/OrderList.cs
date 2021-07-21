@@ -38,8 +38,7 @@ namespace Medicine.Models
             if (existing != null)
             {
                 existing.Drug = item.Drug;
-                existing.Amount = item.Amount;
-                existing.Date = item.Date;
+                existing.Amount = item.Amount;                
                 _context.SaveChanges();
             }
         }
@@ -51,6 +50,10 @@ namespace Medicine.Models
         public  Order Get(Drug drug)
         {
             return _context.Orders.Where(t => t.Drug == drug).FirstOrDefault();
+        }
+        public Order Get()
+        {
+            return _context.Orders.FirstOrDefault();
         }
 
         public override List<Order> GetAll()
