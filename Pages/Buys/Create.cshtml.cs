@@ -42,7 +42,6 @@ namespace Medicine.Pages.Buys
             }
             var addBuy = new Buy
             {
-                Id = BuyView.Id,
                 Drug = _druglist.Get(BuyView.Drug),
                 Amount=BuyView.Amount
             };
@@ -51,14 +50,14 @@ namespace Medicine.Pages.Buys
 
              if (add.Count>=addBuy.Amount)
             {
-                add.Count = add.Count - addBuy.Amount;
+                add.Count -= addBuy.Amount;
                 _druglist.Edit(add);
                 _buylist.Add(addBuy);
                 var addOrder = new Order
                 {
                     Drug = _druglist.Get(BuyView.Drug),
-                    Id = _orderlist.Get(_druglist.Get(BuyView.Drug)).Id,
-                    Amount = BuyView.Amount
+                    Amount = BuyView.Amount,
+                    
                 };
                 if (_orderlist.Get(addOrder.Drug)==null)
                 {
@@ -66,7 +65,8 @@ namespace Medicine.Pages.Buys
                 }
                 else
                 {
-                    addOrder.Amount = addOrder.Amount + _orderlist.Get(_druglist.Get(BuyView.Drug)).Amount;
+                    addOrder.Id = _orderlist.Get(addOrder.Drug.Name).Id;
+                    addOrder.Amount +=  _orderlist.Get(addOrder.Drug.Name).Amount;
                     _orderlist.Edit(addOrder);
                 }
                 
@@ -79,9 +79,9 @@ namespace Medicine.Pages.Buys
             
             return RedirectToPage("./Index");
         }
-        private bool DrugExists(int id)
+       /* private bool DrugExists(int id)
         {
             return _druglist.Get(id) != null;
-        }
+        }*/
     }
 }

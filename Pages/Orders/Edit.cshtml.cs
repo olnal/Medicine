@@ -13,24 +13,26 @@ namespace Medicine.Pages.Orders
 {
     public class EditModel : PageModel
     {
-        private readonly Medicine.Data.RazorPagesContext _context;
+        private readonly OrderList _orderlist;
+        private readonly DrugList _druglist;
 
-        public EditModel(Medicine.Data.RazorPagesContext context)
+        public EditModel(OrderList orderlist, DrugList druglist)
         {
-            _context = context;
+            _orderlist = orderlist;
+            _druglist = druglist;
         }
 
         [BindProperty]
         public Order Order { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
+            Order = _orderlist.Get(id);
 
             if (Order == null)
             {
@@ -41,22 +43,43 @@ namespace Medicine.Pages.Orders
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+            var DBDrug = _druglist.Get(Order.Drug.Name);
 
-            _context.Attach(Order).State = EntityState.Modified;
+            if (DBDrug == null)
+            {
+                var newdrug = new Drug
+                {
+                    Name = Order.Drug.Name,
+                    Type = new DrugType
+                    {
+                        Type = "Невідомий"
+                    },
+                    Price = 0,
+                    Count = 0
+                };
+                _druglist.Add(newdrug);
+            };
+            var editOrder = new Order
+            {
+                Id = Order.Id,
+                Drug = DBDrug,
+                Amount = Order.Amount
+            };
+            
 
             try
             {
-                await _context.SaveChangesAsync();
+                _orderlist.Edit(editOrder);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrderExists(Order.Id))
+                if (!OrderExists(editOrder.Id))
                 {
                     return NotFound();
                 }
@@ -71,7 +94,7 @@ namespace Medicine.Pages.Orders
 
         private bool OrderExists(int id)
         {
-            return _context.Orders.Any(e => e.Id == id);
+            return _orderlist.Get(id) != null;
         }
     }
 }

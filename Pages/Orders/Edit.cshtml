@@ -2,12 +2,12 @@
 @model Medicine.Pages.Orders.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Редагування";
 }
 
-<h1>Edit</h1>
+<h1></h1>
 
-<h4>Order</h4>
+<h4>@Html.DisplayFor(model => model.Order.Drug.Name)</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,19 +15,22 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Order.Id" />
             <div class="form-group">
-                <label asp-for="Order.Amount" class="control-label"></label>
+                <label asp-for="Order.Drug.Name" class="control-label">Назва</label>
+                <input asp-for="Order.Drug.Name" class="form-control" />
+                <span asp-validation-for="Order.Drug.Name" class="text-danger"></span>
+                <label asp-for="Order.Amount" class="control-label">Кількість</label>
                 <input asp-for="Order.Amount" class="form-control" />
                 <span asp-validation-for="Order.Amount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Зберегти" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index">Назад</a>
 </div>
 
 @section Scripts {

@@ -29,9 +29,6 @@ namespace Medicine.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("DrugId")
                         .HasColumnType("int");
 
@@ -54,8 +51,8 @@ namespace Medicine.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("TypeId")
                         .HasColumnType("int");
@@ -92,9 +89,6 @@ namespace Medicine.Migrations
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
 
                     b.Property<int?>("DrugId")
                         .HasColumnType("int");

@@ -12,24 +12,25 @@ namespace Medicine.Pages.Orders
 {
     public class DeleteModel : PageModel
     {
-        private readonly Medicine.Data.RazorPagesContext _context;
-
-        public DeleteModel(Medicine.Data.RazorPagesContext context)
+        
+        private readonly OrderList _orderlist;
+        public DeleteModel(OrderList orderlist)
         {
-            _context = context;
+            
+            _orderlist = orderlist;
         }
 
         [BindProperty]
         public Order Order { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
+            Order = _orderlist.Get(id);
 
             if (Order == null)
             {
@@ -38,19 +39,18 @@ namespace Medicine.Pages.Orders
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public IActionResult OnPostAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Order = await _context.Orders.FindAsync(id);
+            Order = _orderlist.Get(id);
 
             if (Order != null)
             {
-                _context.Orders.Remove(Order);
-                await _context.SaveChangesAsync();
+                _orderlist.Delete(Order.Id);
             }
 
             return RedirectToPage("./Index");

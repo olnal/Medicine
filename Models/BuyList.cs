@@ -59,6 +59,10 @@ namespace Medicine.Models
         {
             return _context.Buys.FirstOrDefault();
         }
+        public Buy Get(string drug)
+        {
+            return _context.Buys.Where(t => t.Drug.Name == drug ).FirstOrDefault();
+        }
 
         public override List<Buy> GetAll()
         {

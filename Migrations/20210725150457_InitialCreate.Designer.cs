@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Medicine.Migrations
 {
     [DbContext(typeof(RazorPagesContext))]
-    [Migration("20210707150714_InitialCreate")]
+    [Migration("20210725150457_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,9 +30,6 @@ namespace Medicine.Migrations
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
 
                     b.Property<int?>("DrugId")
                         .HasColumnType("int");
@@ -56,8 +53,8 @@ namespace Medicine.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("TypeId")
                         .HasColumnType("int");
@@ -94,9 +91,6 @@ namespace Medicine.Migrations
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
 
                     b.Property<int?>("DrugId")
                         .HasColumnType("int");

@@ -13,11 +13,9 @@ namespace Medicine.Pages.Orders
     public class CreateModel : PageModel
     {
         private readonly DrugList _druglist;
-        private readonly BuyList _buylist;
         private readonly OrderList _orderlist;
-        public CreateModel(BuyList buylist, DrugList druglist, OrderList orderlist)
+        public CreateModel(DrugList druglist, OrderList orderlist)
         {
-            _buylist = buylist;
             _druglist = druglist;
             _orderlist = orderlist;
         }
@@ -43,7 +41,7 @@ namespace Medicine.Pages.Orders
                 if (Order!=null)
                 {
                     var drug = _druglist.Get(Order.Drug.Name);
-                    drug.Count = drug.Count + Order.Amount;
+                    drug.Count += Order.Amount;
                     _druglist.Edit(drug);
                     _orderlist.Delete(Order.Id);
                 }

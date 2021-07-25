@@ -13,12 +13,11 @@ namespace Medicine.Pages.DrugTypes
 {
     public class EditModel : PageModel
     {
-       private readonly DrugList _druglist;
+       
         private readonly TypeList _typelist;
 
-        public EditModel(DrugList druglist, TypeList typelist)
+        public EditModel( TypeList typelist)
         {
-            _druglist = druglist;
             _typelist = typelist;
         }
 
@@ -53,17 +52,20 @@ namespace Medicine.Pages.DrugTypes
             {
                 return Page();
             }
-            var tempDrug = _druglist.Get(DrugType);
-            var editedDrug = new Drug
+            /*var tempDrug = _druglist.Get(DrugType);
+            if (tempDrug != null)
             {
-                Id = tempDrug.Id,
-                Name = tempDrug.Name,
-                Type = DrugType,
-                Price = tempDrug.Price,
-                Count = tempDrug.Count
-            };
-
-            //editedDrug.Type.Type = "Sho popalo";
+                var editedDrug = new Drug
+                {
+                    Id = tempDrug.Id,
+                    Name = tempDrug.Name,
+                    Type = DrugType,
+                    Price = tempDrug.Price,
+                    Count = tempDrug.Count
+                };
+            }            
+            */
+            
 
             try
             {
@@ -80,33 +82,14 @@ namespace Medicine.Pages.DrugTypes
                     throw;
                 }
             }
-            try
-            {
-                _druglist.Edit(editedDrug);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DrugExists(editedDrug.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
             
-            catch (InvalidOperationException)
-            {
-
-            }
             return RedirectToPage("./Index");
         }
 
-        private bool DrugExists(int id)
+        /*private bool DrugExists(int id)
         {
             return _druglist.Get(id) != null;
-        }
+        }*/
         private bool TypeExists(int id)
         {
             return _typelist.Get(id) != null;

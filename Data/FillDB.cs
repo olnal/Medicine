@@ -53,7 +53,7 @@ namespace Medicine.Data
                             Id = 1,
                             Name = "Медопрам",
                             Type = context.DrugTypes.Where(t => t.Type == "Пігулка").FirstOrDefault(),
-                            Price = 151.38,
+                            Price = 151,
                             Count = 20
                         },
                          new Drug
@@ -61,7 +61,7 @@ namespace Medicine.Data
                              Id = 2,
                              Name = "Діклофенак",
                              Type = context.DrugTypes.Where(t => t.Type == "Мазь").FirstOrDefault(),
-                             Price = 99.34,
+                             Price = 99,
                              Count = 5
                          }
                          ,
@@ -70,7 +70,7 @@ namespace Medicine.Data
                              Id = 3,
                              Name = "Підгузники",
                              Type = context.DrugTypes.Where(t => t.Type == "Засоби гігієни").FirstOrDefault(),
-                             Price = 99.34,
+                             Price = 99,
                              Count = 5
                          },
                          new Drug
@@ -78,7 +78,7 @@ namespace Medicine.Data
                              Id = 4,
                              Name = "Вода мінеральна",
                              Type = context.DrugTypes.Where(t => t.Type == "Інше").FirstOrDefault(),
-                             Price = 99.34,
+                             Price = 105,
                              Count = 5
                          },
                          new Drug
@@ -86,7 +86,7 @@ namespace Medicine.Data
                              Id = 5,
                              Name = "Флюколд",
                              Type = context.DrugTypes.Where(t => t.Type == "Пігулка").FirstOrDefault(),
-                             Price = 99.34,
+                             Price = 76,
                              Count = 5
                          },
                          new Drug
@@ -94,7 +94,7 @@ namespace Medicine.Data
                              Id = 6,
                              Name = "Триакутан",
                              Type = context.DrugTypes.Where(t => t.Type == "Мазь").FirstOrDefault(),
-                             Price = 99.34,
+                             Price = 543,
                              Count = 5
                          }
                     );

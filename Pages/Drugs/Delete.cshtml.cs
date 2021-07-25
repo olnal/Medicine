@@ -13,11 +13,16 @@ namespace Medicine.Pages.Drugs
     public class DeleteModel : PageModel
     {
         private readonly DrugList _druglist;
-         
+        private readonly BuyList _buylist;
+        private readonly OrderList _orderlist;
 
-        public DeleteModel(DrugList druglist)
+
+        public DeleteModel(DrugList druglist, BuyList buylist, OrderList orderlist)
         {
-            _druglist = druglist;            
+            _druglist = druglist;
+            _buylist = buylist;
+            _orderlist = orderlist;
+
         }
 
         [BindProperty]
@@ -55,10 +60,19 @@ namespace Medicine.Pages.Drugs
             {
                 return NotFound();
             }
+
+            if (_buylist.Get(DrugView.Name) != null || _orderlist.Get(DrugView.Name)!=null)
+            {
+                _druglist.Delete(DrugView.Id);
+                return RedirectToPage("./Index");
+
+            }
+            else
+            {
+                ViewData["Message"] = "Неможливо видалити, так як ліки знаходяться в списку замовлення або списку продажів";
+                return Page();
+            }           
             
-            _druglist.Delete(DrugView.Id);
-            
-            return RedirectToPage("./Index");
         }
     }
 }

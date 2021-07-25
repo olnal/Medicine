@@ -2,18 +2,24 @@
 @model Medicine.Pages.Orders.DeleteModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Видалення";
 }
 
-<h1>Delete</h1>
+<h1></h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Ви впевнені щодо видалення даного препарату?</h3>
 <div>
-    <h4>Order</h4>
+    <h4>@Html.DisplayFor(model => model.Order.Drug.Name)</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Order.Amount)
+            Назва
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Order.Drug.Name)
+        </dd>
+        <dt class="col-sm-2">
+           Кількість
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Order.Amount)
@@ -22,7 +28,7 @@
     
     <form method="post">
         <input type="hidden" asp-for="Order.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <input type="submit" value="Видалити" class="btn btn-danger" /> |
+        <a asp-page="./Index">Назад</a>
     </form>
 </div>

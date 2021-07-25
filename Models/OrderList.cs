@@ -51,6 +51,11 @@ namespace Medicine.Models
         {
             return _context.Orders.Where(t => t.Drug == drug).FirstOrDefault();
         }
+
+        public Order Get(string drug)
+        {
+            return _context.Orders.Where(t => t.Drug.Name == drug).FirstOrDefault();
+        }
         public Order Get()
         {
             return _context.Orders.FirstOrDefault();

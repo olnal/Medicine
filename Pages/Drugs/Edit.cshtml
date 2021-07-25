@@ -2,12 +2,12 @@
 @model Medicine.Pages.Drugs.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Редагування";
 }
 
-<h1>Edit</h1>
+<h1></h1>
 
-<h4>Drug</h4>
+<h4>Список ліків</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,34 +15,34 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="DrugView.Id" />
             <div class="form-group">
-                <label asp-for="DrugView.Name" class="control-label"></label>
+                <label asp-for="DrugView.Name" class="control-label">Назва</label>
                 <input asp-for="DrugView.Name" class="form-control" />
                 <span asp-validation-for="DrugView.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DrugView.Type" class="control-label"></label>
+                <label asp-for="DrugView.Type" class="control-label">Тип</label>
                 <input asp-for="DrugView.Type" class="form-control" />
                 <span asp-validation-for="DrugView.Type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DrugView.Price" class="control-label"></label>
+                <label asp-for="DrugView.Price" class="control-label">Ціна</label>
                 <input asp-for="DrugView.Price" class="form-control" />
                 <span asp-validation-for="DrugView.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DrugView.Count" class="control-label"></label>
+                <label asp-for="DrugView.Count" class="control-label">Кількість</label>
                 <input asp-for="DrugView.Count" class="form-control" />
                 <span asp-validation-for="DrugView.Count" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Зберегти" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index">Назад</a>
 </div>
 
 @section Scripts {

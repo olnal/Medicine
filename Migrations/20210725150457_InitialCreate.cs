@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Medicine.Migrations
 {
@@ -27,7 +26,7 @@ namespace Medicine.Migrations
                     Id = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TypeId = table.Column<int>(type: "int", nullable: true),
-                    Price = table.Column<double>(type: "float", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Count = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -48,8 +47,7 @@ namespace Medicine.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DrugId = table.Column<int>(type: "int", nullable: true),
-                    Amount = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Amount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,8 +67,7 @@ namespace Medicine.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DrugId = table.Column<int>(type: "int", nullable: true),
-                    Amount = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Amount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
