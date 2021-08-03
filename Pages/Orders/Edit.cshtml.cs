@@ -23,7 +23,7 @@ namespace Medicine.Pages.Orders
         }
 
         [BindProperty]
-        public Order Order { get; set; }
+        public OrderView OrderView { get; set; }
 
         public IActionResult OnGetAsync(int? id)
         {
@@ -32,9 +32,14 @@ namespace Medicine.Pages.Orders
                 return NotFound();
             }
 
-            Order = _orderlist.Get(id);
+            OrderView = new OrderView
+            {
+                Id = _orderlist.Get(id).Id,
+                Drug = _orderlist.Get(id).Drug.Name,
+                Amount = _orderlist.Get(id).Amount
+            };
 
-            if (Order == null)
+            if (OrderView == null)
             {
                 return NotFound();
             }
@@ -49,13 +54,13 @@ namespace Medicine.Pages.Orders
             {
                 return Page();
             }
-            var DBDrug = _druglist.Get(Order.Drug.Name);
+            var DBDrug = _druglist.Get(OrderView.Drug);
 
             if (DBDrug == null)
             {
                 var newdrug = new Drug
                 {
-                    Name = Order.Drug.Name,
+                    Name = OrderView.Drug,
                     Type = new DrugType
                     {
                         Type = "Невідомий"
@@ -67,9 +72,9 @@ namespace Medicine.Pages.Orders
             };
             var editOrder = new Order
             {
-                Id = Order.Id,
+                Id = OrderView.Id,
                 Drug = DBDrug,
-                Amount = Order.Amount
+                Amount = OrderView.Amount
             };
             
 

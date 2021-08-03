@@ -7,20 +7,20 @@
 
 <h1></h1>
 
-<h4>@Html.DisplayFor(model => model.Order.Drug.Name)</h4>
+<h4>@Html.DisplayFor(model => model.OrderView.Drug)</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Order.Id" />
+            <input type="hidden" asp-for="OrderView.Id" />
             <div class="form-group">
-                <label asp-for="Order.Drug.Name" class="control-label">Назва</label>
-                <input asp-for="Order.Drug.Name" class="form-control" />
-                <span asp-validation-for="Order.Drug.Name" class="text-danger"></span>
-                <label asp-for="Order.Amount" class="control-label">Кількість</label>
-                <input asp-for="Order.Amount" class="form-control" />
-                <span asp-validation-for="Order.Amount" class="text-danger"></span>
+                <label asp-for="OrderView.Drug" class="control-label">Назва</label>
+                <input asp-for="OrderView.Drug" class="form-control" />
+                <span asp-validation-for="OrderView.Drug" class="text-danger"></span>
+                <label asp-for="OrderView.Amount" class="control-label">Кількість</label>
+                <input asp-for="OrderView.Amount" class="form-control" />
+                <span asp-validation-for="OrderView.Amount" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Зберегти" class="btn btn-primary" />
